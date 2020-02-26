@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import ListaInmuebles from "./components/views/ListaInmuebles";
+import registerUser from './components/security/registerUsers';
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import theme from './theme/theme';
 import AppNavbar from "./components/layout/AppNavbar";
@@ -18,6 +19,7 @@ class App extends Component{
 
               <Switch>
                 <Route path="/" exact component={ListaInmuebles}></Route>
+                <Route path="/registerUser" exact component={registerUser}></Route>
               </Switch>
 
             </Grid>

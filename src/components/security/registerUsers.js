@@ -22,6 +22,27 @@ const style = {
     }
 }
 export default class registerUser extends Component {
+
+    state = {
+        user : {
+            name : '',
+            lastName : '',
+            email : '',
+            password : ''
+        }
+    }
+
+    handleChange = (e) => {
+        let user = {...this.state.user}
+        user[e.target.name] = e.target.value;
+        this.setState({user})
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state.user)
+    }
+
     render() {
         return (
             <Container maxWidth='md'>
@@ -36,25 +57,25 @@ export default class registerUser extends Component {
 
                         <Grid container spacing={2}>
                             <Grid item md={6} xs={12}>
-                                <TextField name='name' fullWidth label='Enter your name'></TextField>
+                                <TextField onChange={this.handleChange} required value={this.state.user.name} name='name' fullWidth label='Enter your name'></TextField>
                             </Grid>
                             <Grid item md={6} xs={12}>
-                                <TextField name="apellido" fullWidth label="Enter your last name"></TextField>
+                                <TextField onChange={this.handleChange} required value={this.state.user.lastName} name="lastName" fullWidth label="Enter your last name"></TextField>
                             </Grid>
                         </Grid>
                             
                         <Grid container spacing={2}>
                             <Grid item md={6} xs={12}>
-                                <TextField name="email" fullWidth label="Enter your e-mail"></TextField>
+                                <TextField onChange={this.handleChange} required value={this.state.user.email} name="email" fullWidth label="Enter your e-mail"></TextField>
                             </Grid>
                             <Grid item md={6} xs={12}>
-                                <TextField type="password" name="apellido" fullWidth label="Enter your password"></TextField>
+                                <TextField onChange={this.handleChange} required value={this.state.user.password} name="password" type='password' fullWidth label="Enter your password"></TextField>
                             </Grid>
                         </Grid>
 
                         <Grid container justify="center">
                             <Grid item md={6} xs={12}>
-                                <Button type="submit" variant="contained" fullWidth size="large" color="primary" style={style.submit}>Register</Button>
+                                <Button onClick={this.handleSubmit} type="submit" variant="contained" fullWidth size="large" color="primary" style={style.submit}>Register</Button>
                             </Grid>
                         </Grid>
 

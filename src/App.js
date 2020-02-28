@@ -9,6 +9,7 @@ import theme from './theme/theme';
 import AppNavbar from "./components/layout/AppNavbar";
 import Grid from "@material-ui/core/Grid";
 import { CssBaseline } from '@material-ui/core';
+import login from './components/security/login';
 
 class App extends Component{
   render(){
@@ -22,6 +23,7 @@ class App extends Component{
               <Switch>
                 <Route path="/" exact component={ListaInmuebles}></Route>
                 <Route path="/registerUser" exact component={registerUser}></Route>
+                <Route path="/login" exact component={login} ></Route>
               </Switch>
 
             </Grid>

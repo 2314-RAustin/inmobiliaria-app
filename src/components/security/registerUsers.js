@@ -10,7 +10,7 @@ const style = {
         marginTop : 8,
         display : 'flex',
         flexDirection : 'column',
-        alignItem : 'center'
+        alignItems : 'center'
     },
     avatar : {
         margin : 8,

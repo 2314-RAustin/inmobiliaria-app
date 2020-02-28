@@ -1,6 +1,10 @@
+
 import React, { Component } from 'react'
 import { Container, Avatar, Typography, Grid, TextField, Button } from '@material-ui/core';
 import LockOutLineIcons from '@material-ui/icons/LockOutlined';
+import { compose } from "recompose";
+import { consumerFirebase } from '../../server';
+
 const style = {
     paper : {
         marginTop : 8,
@@ -21,14 +25,25 @@ const style = {
         marginBottome: 20
     }
 }
-export default class registerUser extends Component {
+class registerUser extends Component {
 
     state = {
+        firebase : null,
         user : {
             name : '',
             lastName : '',
             email : '',
             password : ''
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.firebase === prevState.firebase){
+            return null;
+        }
+
+        return {
+            firebase : nextProps.firebase
         }
     }
 
@@ -40,7 +55,26 @@ export default class registerUser extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state.user)
+
+        const { user, firebase } = this.state;
+
+        firebase.db
+        .collection('users')
+        .add(user)
+        .then(userAfter => {
+            console.log(`Insercion exitosa del valor: ${userAfter}`)
+            this.setState({
+                user : {
+                    name : '',
+                    lastName : '',
+                    email : '',
+                    password : ''
+                }
+            })
+        })
+        .catch(error => {
+            console.log(`Hubo un error:  ${error}`)
+        })
     }
 
     render() {
@@ -86,3 +120,5 @@ export default class registerUser extends Component {
         )
     }
 }
+
+export default compose(consumerFirebase)(registerUser);

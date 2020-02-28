@@ -8,12 +8,14 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import theme from './theme/theme';
 import AppNavbar from "./components/layout/AppNavbar";
 import Grid from "@material-ui/core/Grid";
+import { CssBaseline } from '@material-ui/core';
 
 class App extends Component{
   render(){
     return(
       <Router>
         <MuiThemeProvider theme={theme}>
+          <CssBaseline/>
           <AppNavbar/>
             <Grid container>
 

@@ -39,7 +39,7 @@ class BarSession extends Component {
                         <Button color = 'inherit'>Login</Button>
                     </div>
                     <div className={classes.sectionMobile}>
-                        <IconButton color = 'inherit'>
+                        <IconButton color='inherit'>
                             <i className='material-icons'>
                                 more_vert
                             </i>
@@ -49,6 +49,6 @@ class BarSession extends Component {
             </Fragment>
         )
     }
-}
+};
 
 export default withStyles(styles) (BarSession); 

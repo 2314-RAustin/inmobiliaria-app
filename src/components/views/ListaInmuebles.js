@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
 import Button from "@material-ui/core/Button";
 
 export default class ListaInmuebles extends Component {

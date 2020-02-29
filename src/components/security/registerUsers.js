@@ -58,22 +58,30 @@ class registerUser extends Component {
 
         const { user, firebase } = this.state;
 
-        firebase.db
-        .collection('users')
-        .add(user)
-        .then(userAfter => {
-            console.log(`Insercion exitosa del valor: ${userAfter}`)
-            this.setState({
-                user : {
-                    name : '',
-                    lastName : '',
-                    email : '',
-                    password : ''
-                }
+        firebase.auth
+        .createUserWithEmailAndPassword(user.email, user.password)
+        .then(auth => {
+
+            const usuarioDB = {
+                usuarioID : auth.user.uid,
+                email : user.email,
+                name : user.name,
+                lastName : user.lastName
+            };
+
+            firebase.db
+            .collection('users')
+            .add(usuarioDB)
+            .then(userAfter => {
+                console.log(`Insercion exitosa del valor: ${userAfter}`)
+                this.props.history.push('/login');
+            })
+            .catch(error => {
+                console.log(`Hubo un error:  ${error}`)
             })
         })
         .catch(error => {
-            console.log(`Hubo un error:  ${error}`)
+            console.log(`Error al crear usuario error: ${error}`)
         })
     }
 

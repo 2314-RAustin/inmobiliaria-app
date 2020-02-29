@@ -6,7 +6,7 @@ export default class componentName extends Component {
     render() {
         return (
             <Fragment>
-                <AppBar position = 'static'>
+                <AppBar position='static'>
                     <BarSession/>
                 </AppBar>
             </Fragment>

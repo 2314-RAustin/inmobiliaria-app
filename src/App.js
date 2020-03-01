@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -10,11 +10,23 @@ import AppNavbar from "./components/layout/AppNavbar";
 import Grid from "@material-ui/core/Grid";
 import { CssBaseline } from '@material-ui/core';
 import login from './components/security/login';
+import { FirebaseContext } from "./server";
 
-class App extends Component{
-  render(){
-    return(
-      <Router>
+export default props =>  {
+  
+  let firebase = React.useContext(FirebaseContext);
+  const [sessionInit , setSessionInit] = useState(false);
+
+  useEffect(() => {
+    firebase.isInitTheSession()
+    .then((res) => {
+      setSessionInit(res);
+
+    })
+  })
+
+  return sessionInit !== false ? (
+    <Router>
         <MuiThemeProvider theme={theme}>
           <CssBaseline/>
           <AppNavbar/>
@@ -29,8 +41,7 @@ class App extends Component{
             </Grid>
         </MuiThemeProvider>
       </Router>
-    )
-  }
+  )
+  :
+  null
 }
-
-export default App;
